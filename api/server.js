@@ -1,14 +1,29 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
-const pictures = [];
+const mockPictures = [
+  {
+    name: 'First picture',
+    height: 100,
+    width: 100,
+    pixels: []
+  },
+  {
+    name: 'Second picture',
+    height: 40,
+    width: 40,
+    pixels: []
+  }
+]
+
+const pictures = mockPictures;
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
 app.get('/pictures', (req, res) => {
-  res.send('This is going to return a list of pictures');
+  res.send(pictures);
 })
 
 app.get('/picture/picture-here', (req, res) => {
