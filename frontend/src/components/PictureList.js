@@ -1,30 +1,44 @@
 import React, { Component } from 'react';
+import Picture from './Picture';
 
 export default class PictureList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pictures: [],
+    }
+  }
   componentWillMount() {
-    // fetch the list of pictures
     fetch('http://localhost:8000/pictures')
     .then(
-      function(response) {
+      (response) => {
         if (response.status !== 200) {
           console.log('Looks like there was a problem. Status Code: ' +
             response.status);
           return;
         }
 
-        // Examine the text in the response
-        response.json().then(function(data) {
-          console.log(data);
+        response.json().then((data) => {
+          this.setState({
+            pictures: data,
+          })
         });
       }
     )
-    .catch(function(err) {
+    .catch((err) => {
       console.log('Fetch Error :-S', err);
     });
   }
   render() {
     return (
-      <p>These will be my pictures</p>
+      <ul>
+        {this.state.pictures.map(p =>
+        <Picture
+           data={p}
+        />
+        )}
+
+      </ul>
     )
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router';
 import App from './App';
+import PictureList from './components/PictureList';
 
 import './index.css';
 
@@ -12,6 +13,7 @@ function PageNotFound() {
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path='/' component={App} />
+    <Route path='/pictures' component={PictureList} />
     <Route path='*' component={PageNotFound} />
   </Router>
 ), document.getElementById('root'));
