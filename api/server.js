@@ -1,6 +1,7 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
+
+const app = express();
 const uuidV1 = require('uuid/v1');
 
 class Picture {
@@ -14,8 +15,8 @@ class Picture {
 const pictures = [];
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -23,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hello World!');
 });
 
 app.get('/pictures', (req, res) => {
@@ -32,9 +33,7 @@ app.get('/pictures', (req, res) => {
 
 app.get('/picture/:uuid', (req, res) => {
   const uuid = req.params.uuid;
-  const pic = pictures.filter((picture) => {
-    return picture.uuid === uuid;
-  });
+  const pic = pictures.filter(picture => picture.uuid === uuid);
   res.send(pic);
 });
 
@@ -42,7 +41,7 @@ app.post('/new', (req, res) => {
   const { name, width, height } = req.body;
   const p = new Picture(name, width, height);
   pictures.push(p);
-  res.status(201).location('/pictures/' + p.uid).json(p);
+  res.status(201).location(`/pictures/${p.uid}`).json(p);
 });
 
 app.listen(8000, () => {
