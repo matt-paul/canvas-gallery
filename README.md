@@ -9,6 +9,15 @@ Next, I used the create-react-app for a boilerplate react app 'frontend' on port
 From there, i then worked on posting a 'picture' to the server.
 
 
+#To run this project
+
+Install dependancies by running npm install in both the api and frontend directories.
+
+Within frontend directory, 'npm start' starts the development server on port 3000.
+
+Within the api folder, 'node src/server.js' starts the server on port 8000.
+
+
 #Where to go from here?
 
 I have not added any tests so far.  Without time constraints, I would like to add tests using jest which I have prior experience with.
