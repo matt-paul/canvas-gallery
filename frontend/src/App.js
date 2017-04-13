@@ -4,7 +4,7 @@ import './App.css';
 
 //Sketching out required components.  Doing these all as class based components now, but once am sure that I will not requie lifecycle methods, will refactor into functional stateless components where possible
 
-class CreatePictureForm extends React.Component {
+export class CreatePictureForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,7 +82,7 @@ class CreatePictureForm extends React.Component {
 }
 
 
-class PictureList extends Component {
+export class PictureList extends Component {
   componentWillMount() {
     // fetch the list of pictures
     fetch('http://localhost:8000/pictures')
@@ -111,7 +111,7 @@ class PictureList extends Component {
   }
 }
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <div className="App">
