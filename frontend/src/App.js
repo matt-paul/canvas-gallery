@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CreatePictureForm from './components/CreatePictureForm';
 import PictureList from './components/PictureList';
-import './App.css';
 
 export class App extends Component {
   constructor(props) {
@@ -42,11 +41,11 @@ export class App extends Component {
     return (
       <div className="App">
         <CreatePictureForm
-          getPictures = {this.getPictures}
+          getPictures={this.getPictures}
         />
         <PictureList
-          pictures = {this.state.pictures}
-          getPictures = {this.getPictures}
+          pictures={this.state.pictures}
+          getPictures={this.getPictures}
         />
       </div>
     );

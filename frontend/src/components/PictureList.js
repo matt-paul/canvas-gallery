@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Picture from './Picture';
 
 export default function PictureList(props) {
