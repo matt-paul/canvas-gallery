@@ -4,10 +4,15 @@ Install dependancies by running npm install in both the api and frontend directo
 
 Within frontend directory, 'npm start' starts the development server on port 3000.
 
-Within the api folder, 'node src/server.js' starts the server on port 8000.
+Within the api folder, 'node server.js' starts the server on port 8000.
 
 
 #Where to go from here?
+
+
+TODO - Move state up so that adding a picture triggers a rerender of the pictures list without needing to refresh the page
+
+TODO - UI - Make the input form look nice.
 
 I have not added any tests so far.  Without time constraints, I would like to add tests using jest which I have prior experience with.
 

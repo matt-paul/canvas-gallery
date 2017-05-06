@@ -1,40 +1,28 @@
 import React, { Component } from 'react';
 
-export default class CreatePictureForm extends Component {
+export default class CreatePictureFormContainer extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       name: '',
       height: '',
       width: '',
     };
 
-    this.handleName = this.handleName.bind(this);
-    this.handleWidth = this.handleWidth.bind(this);
-    this.handleHeight = this.handleHeight.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleName(event) {
+  handleChange(event) {
     this.setState({
-      name: event.target.value,
+      [event.target.name]: event.target.value,
     });
-  }
-
-  handleWidth(event) {
-    this.setState({
-      width: event.target.value,
-    });
-  }
-
-
-  handleHeight(event) {
-    this.setState({
-      height: event.target.value,
-    });
+    console.log(this.state)
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const data = this.state;
     fetch('http://localhost:8000/new', {
       method: 'POST',
@@ -50,26 +38,48 @@ export default class CreatePictureForm extends Component {
     .catch((error) => {
       console.log(error);
     });
-    event.preventDefault();
   }
-
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">
-          Name:
-          <input id="name" type="text" value={this.state.name} onChange={this.handleName} />
-        </label>
-        <label htmlFor="height">
-          Height:
-          <input id="height" type="number" value={this.state.height} onChange={this.handleHeight} />
-        </label>
-        <label htmlFor="width">
-          Width:
-          <input id="width" type="number" value={this.state.width} onChange={this.handleWidth} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
+      <CreatePictureForm
+        picture={this.state}
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
+      />
+    )
   }
+}
+
+function CreatePictureForm(props) {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <label htmlFor="name">
+        Name:
+        <input
+          name="name"
+          type="text"
+          value={props.name}
+          onChange={props.handleChange} />
+      </label>
+      <label htmlFor="height">
+        Height:
+        <input
+          name="height"
+          type="text"
+          value={props.height}
+          onChange={props.handleChange}
+        />
+      </label>
+      <label htmlFor="height">
+        Width:
+        <input
+          name="width"
+          type="text"
+          value={props.width}
+          onChange={props.handleChange}
+        />
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+  );
 }

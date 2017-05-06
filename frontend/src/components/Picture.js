@@ -1,21 +1,14 @@
 import React from 'react';
 
-export default function Picture() {
-  const url = `picture/${this.props.data.uuid}`;
+export default function Picture(props) {
+  const url = `picture/${props.data.uuid}`;
   return (
     <li>
       <a href={url}>
-        <h3>{this.props.data.name}</h3>
+        <h3>The name is ... {props.data.name}</h3>
+        <h3>The height is ... {props.data.height}</h3>
+        <h3>The width is ... {props.data.width}</h3>
       </a>
     </li>
   );
 }
-
-Picture.propTypes = {
-  data: React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    width: React.PropTypes.string.isRequired,
-    height: React.PropTypes.string.isRequired,
-    uuid: React.PropTypes.string.isRequired,
-  }),
-};

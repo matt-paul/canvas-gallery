@@ -8,6 +8,8 @@ export default class PictureList extends Component {
       pictures: [],
     };
   }
+
+  
   componentWillMount() {
     fetch('http://localhost:8000/pictures')
     .then(
@@ -28,6 +30,13 @@ export default class PictureList extends Component {
       console.log('Fetch Error :-S', err);
     });
   }
+
+
+  componentDidUpdate() {
+    console.log('it updated')
+  }
+
+
   render() {
     return (
       <ul>
