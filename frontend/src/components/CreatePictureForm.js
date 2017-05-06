@@ -14,16 +14,18 @@ export default class CreatePictureFormContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log(this.state)
   }
+
 
   handleSubmit(event) {
     event.preventDefault();
     const data = this.state;
+
     fetch('http://localhost:8000/new', {
       method: 'POST',
       headers: {
@@ -33,22 +35,26 @@ export default class CreatePictureFormContainer extends Component {
       body: JSON.stringify(data),
     })
     .then((response) => {
-      console.log(response);
+      this.props.getPictures();
     })
     .catch((error) => {
       console.log(error);
     });
   }
+
+
   render() {
     return (
       <CreatePictureForm
         picture={this.state}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
+        handleClickEvent={this.handleClickEvent}
       />
     )
   }
 }
+
 
 function CreatePictureForm(props) {
   return (

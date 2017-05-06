@@ -5,7 +5,8 @@ const app = express();
 const uuidV1 = require('uuid/v1');
 
 class Picture {
-  constructor(name, width = 100, height = 100) {
+  // constructor(name, width = 100, height = 100) {
+  constructor(name, height, width) {
     this.name = name;
     this.height = height;
     this.width = width;
@@ -38,8 +39,10 @@ app.get('/picture/:uuid', (req, res) => {
 });
 
 app.post('/new', (req, res) => {
-  const { name, width, height } = req.body;
-  const p = new Picture(name, width, height);
+  const name = req.body.name;
+  const height = req.body.height;
+  const width = req.body.width
+  const p = new Picture(name, height, width);
   pictures.push(p);
   res.status(201).location(`/pictures/${p.uid}`).json(p);
 });
