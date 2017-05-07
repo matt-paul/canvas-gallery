@@ -1,5 +1,6 @@
 import React from 'react';
 import Picture from './Picture';
+import PropTypes from 'prop-types';
 
 export default function PictureList(props) {
   const pictures = props.pictures || [];
@@ -8,9 +9,16 @@ export default function PictureList(props) {
       {pictures.map(p =>
         <Picture
           key={p.uuid}
-          data={p}
+          name={p.name}
+          height={p.height}
+          width={p.width}
+          uuid={p.uuid}
         />,
       )}
     </ul>
   );
+}
+
+PictureList.propTypes = {
+  pictures: PropTypes.array,
 }

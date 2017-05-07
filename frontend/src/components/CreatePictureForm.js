@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-export default class CreatePictureFormContainer extends Component {
+class CreatePictureFormContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -49,16 +51,24 @@ export default class CreatePictureFormContainer extends Component {
         picture={this.state}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
-        handleClickEvent={this.handleClickEvent}
+        className={this.props.className}
       />
     )
   }
 }
 
+export default styled(CreatePictureFormContainer)`
+  background-color: red;
+  margin: 30px;
+
+`;
 
 function CreatePictureForm(props) {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form
+      onSubmit={props.handleSubmit}
+      className={props.className}
+      >
       <label htmlFor="name">
         Name:
         <input
@@ -71,7 +81,7 @@ function CreatePictureForm(props) {
         Height:
         <input
           name="height"
-          type="text"
+          type="number"
           value={props.height}
           onChange={props.handleChange}
         />
@@ -80,7 +90,7 @@ function CreatePictureForm(props) {
         Width:
         <input
           name="width"
-          type="text"
+          type="number"
           value={props.width}
           onChange={props.handleChange}
         />
@@ -89,3 +99,11 @@ function CreatePictureForm(props) {
     </form>
   );
 }
+
+CreatePictureForm.propTypes = {
+  name: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+};
