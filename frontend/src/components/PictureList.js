@@ -1,5 +1,5 @@
 import React from 'react';
-import Picture from './Picture';
+import PictureContainer from './Picture';
 import PropTypes from 'prop-types';
 
 export default function PictureList(props) {
@@ -7,7 +7,7 @@ export default function PictureList(props) {
   return (
     <ul>
       {pictures.map(p =>
-        <Picture
+        <PictureContainer
           key={p.uuid}
           name={p.name}
           height={p.height}

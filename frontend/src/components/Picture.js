@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-class Picture extends React.Component {
+export default class PictureContainer extends React.Component {
   constructor(props) {
     super(props);
     this.updateCanvas = this.updateCanvas.bind(this);
@@ -21,8 +21,6 @@ class Picture extends React.Component {
   }
 
   onMouseDown(event) {
-    console.log('mouse is down, whataya gonna do?')
-    console.log(this.rect)
     this.mouseX = event.clientX - this.rect.left;
     this.mouseY = event.clientY - this.rect.top;
     this.canvas.addEventListener('mousemove', this.onMouseMove);
@@ -40,41 +38,67 @@ class Picture extends React.Component {
     this.ctx.stroke();
   }
 
-  onMouseUp(event) {
+  onMouseUp() {
     this.canvas.removeEventListener('mousemove', this.onMouseMove);
-    document.body.removeEventListener('mouseup', this.onMouseUp)
+    document.body.removeEventListener('mouseup', this.onMouseUp);
   }
 
   updateCanvas() {
     this.rect = this.canvas.getBoundingClientRect(); // this is used to counter the offset, ie the circle now appears with its center exactly at mouse position.
   }
   render() {
-    const url = `picture/${this.props.uuid}`;
-
+    // const url = `picture/${this.props.uuid}`;
     return (
-        <li>
-          <canvas
-            onMouseDown={this.onMouseDown}
-            ref={(canvas) => { this.canvas = canvas; }}
-            className={this.props.className}
-            width={this.props.width}
-            height={this.props.height}/>
-          <input
-            ref={(colorPicker) => { this.colorPicker = colorPicker; }}
-            type="color"/>
-      </li>
+      <Picture
+        canvasRef={(canvas) => { this.canvas = canvas; }}
+        colorPickerRef={(colorPicker) => { this.colorPicker = colorPicker; }}
+        onMouseDown={this.onMouseDown}
+        name={this.props.name}
+        height={this.props.height}
+        width={this.props.width}
+      />
     );
   }
+}
+
+PictureContainer.propTypes = {
+  name: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
+  uuid: PropTypes.string.isRequired,
+};
+
+
+function Picture(props) {
+  return (
+    <li>
+      <h2>{props.name}</h2>
+      <canvas
+        className={props.className}
+        onMouseDown={props.onMouseDown}
+        ref={props.canvasRef}
+        width={props.width}
+        height={props.height}
+      />
+      <input
+        ref={props.colorPickerRef}
+        type="color"
+      />
+    </li>
+  );
 }
 
 Picture.propTypes = {
   name: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
-  uuid: PropTypes.string.isRequired,
-}
+  onMouseDown: PropTypes.func.isRequired,
+  canvasRef: PropTypes.func.isRequired,
+  colorPickerRef: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
 
-export default styled(Picture)`
+styled(Picture)`
   box-style: border-box;
   background-color:#ddc;
   border:solid 20px #eee;

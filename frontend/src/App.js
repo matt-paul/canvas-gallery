@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import CreatePictureForm from './components/CreatePictureForm';
 import PictureList from './components/PictureList';
+import styled from 'styled-components';
 import './App.css'
 
-export class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.pictures = [];
@@ -53,4 +54,7 @@ export class App extends Component {
   }
 }
 
-export default App;
+export default styled(App)`
+  outline: 1px solid red;
+`;
+// export default App;
