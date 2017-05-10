@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-class CreatePictureFormContainer extends Component {
+export default class CreatePictureFormContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -16,13 +16,11 @@ class CreatePictureFormContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
-
 
   handleSubmit(event) {
     event.preventDefault();
@@ -36,7 +34,7 @@ class CreatePictureFormContainer extends Component {
       },
       body: JSON.stringify(data),
     })
-    .then((response) => {
+    .then(() => {
       this.props.getPictures();
     })
     .catch((error) => {
@@ -47,7 +45,7 @@ class CreatePictureFormContainer extends Component {
 
   render() {
     return (
-      <CreatePictureForm
+      <StyledForm
         picture={this.state}
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
@@ -56,12 +54,6 @@ class CreatePictureFormContainer extends Component {
     )
   }
 }
-
-export default styled(CreatePictureFormContainer)`
-  background-color: red;
-  margin: 30px;
-
-`;
 
 function CreatePictureForm(props) {
   return (
@@ -107,3 +99,8 @@ CreatePictureForm.propTypes = {
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
 };
+
+const StyledForm = styled(CreatePictureForm)`
+  background-color: red;
+  margin: 30px;
+`;

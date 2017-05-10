@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
 import CreatePictureForm from './components/CreatePictureForm';
 import PictureList from './components/PictureList';
-import styled from 'styled-components';
-import './App.css'
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class App extends Component {
   componentWillMount() {
     this.state = {
       pictures: this.getPictures(),
-    }
+    };
   }
 
   getPictures() {
@@ -38,10 +38,9 @@ class App extends Component {
     });
   }
 
-
   render() {
     return (
-      <div className="App">
+      <div className={this.props.className}>
         <CreatePictureForm
           getPictures={this.getPictures}
         />
@@ -55,6 +54,7 @@ class App extends Component {
 }
 
 export default styled(App)`
-  outline: 1px solid red;
+  * {
+    outline: 1px solid red;
+  }
 `;
-// export default App;

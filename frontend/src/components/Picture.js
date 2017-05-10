@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-export default class PictureContainer extends React.Component {
+export default class PictureContainer extends Component {
   constructor(props) {
     super(props);
     this.updateCanvas = this.updateCanvas.bind(this);
@@ -47,16 +47,18 @@ export default class PictureContainer extends React.Component {
     this.rect = this.canvas.getBoundingClientRect(); // this is used to counter the offset, ie the circle now appears with its center exactly at mouse position.
   }
   render() {
-    // const url = `picture/${this.props.uuid}`;
+    const url = `picture/${this.props.uuid}`;
     return (
-      <Picture
-        canvasRef={(canvas) => { this.canvas = canvas; }}
-        colorPickerRef={(colorPicker) => { this.colorPicker = colorPicker; }}
-        onMouseDown={this.onMouseDown}
-        name={this.props.name}
-        height={this.props.height}
-        width={this.props.width}
-      />
+      <a href={url}>
+        <StyledPic
+          canvasRef={(canvas) => { this.canvas = canvas; }}
+          colorPickerRef={(colorPicker) => { this.colorPicker = colorPicker; }}
+          onMouseDown={this.onMouseDown}
+          name={this.props.name}
+          height={this.props.height}
+          width={this.props.width}
+        />
+      </a>
     );
   }
 }
@@ -71,15 +73,18 @@ PictureContainer.propTypes = {
 
 function Picture(props) {
   return (
-    <li>
+    <li
+      className={props.className}
+    >
       <h2>{props.name}</h2>
-      <canvas
-        className={props.className}
-        onMouseDown={props.onMouseDown}
-        ref={props.canvasRef}
-        width={props.width}
-        height={props.height}
-      />
+      <div>
+        <canvas
+          onMouseDown={props.onMouseDown}
+          ref={props.canvasRef}
+          width={props.width}
+          height={props.height}
+        />
+      </div>
       <input
         ref={props.colorPickerRef}
         type="color"
@@ -98,14 +103,20 @@ Picture.propTypes = {
   className: PropTypes.string,
 };
 
-styled(Picture)`
-  box-style: border-box;
-  background-color:#ddc;
-  border:solid 20px #eee;
-  border-bottom-color:#fff;
-  border-left-color:#eee;
-  border-radius:2px;
-  border-right-color:#eee;
-  border-top-color:#ddd;
-  box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+const StyledPic = styled(Picture)`
+  div {
+    display: inline-block;
+    box-style: border-box;
+    background-color:#ddc;
+    border:solid 20px #eee;
+    border-bottom-color:#fff;
+    border-left-color:#eee;
+    border-radius:2px;
+    border-right-color:#eee;
+    border-top-color:#ddd;
+    box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+  }
+  h2 {
+    color: green;
+  }
 `;
